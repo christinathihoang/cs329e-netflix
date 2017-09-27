@@ -44,17 +44,17 @@ actual_scores_cache = create_cache("JT26983-ActualRatingByCustomerIDAndMovieID.p
 movie_year_cache = create_cache("JT26983-MovieYearByMovieID.pickle")
 avg_score_year_cache = create_cache("cache-movieAverageByYear.pickle")
 
-	# ------------
+# ------------
 # netflix_eval
 # ------------
 
-def netflix_eval(reader, writer) :
+def netflix_eval(reader, writer):
     predictions = []
     actual = []
-
+    prediction = 0
     # iterate throught the file reader line by line
     for line in reader:
-    # need to get rid of the '\n' by the end of the line
+        # need to get rid of the '\n' by the end of the line
         line = line.strip()
         # check if the line ends with a ":", i.e., it's a movie title 
         if line[-1] == ':':
@@ -74,14 +74,16 @@ def netflix_eval(reader, writer) :
             writer.write(line)
             writer.write('\n')
         else:
-		# It's a customer
+	    # It's a customer
             current_customer = line
             predictions.append(prediction)
-            actual.append(actual_scores_cache[int(current_movie)][int(current_customer)])
+            actual_score = actual_scores_cache[int(current_movie),int(current_customer)]
+            actual.append(actual_score)
             writer.write(str(prediction)) 
             writer.write('\n')
-                
-    # calculate rmse for predications and actuals
-    rmse = sqrt(mean(square(subtract(predictions, actual))))
-    writer.write(str(rmse)[:4] + '\n')
 
+                
+        # calculate rmse for predications and actuals
+        for i in range(len(actual)):
+           rmse = sqrt((prediction-actual)/len(actual))
+           writer.write(str(rmse)[:4] + '\n')
