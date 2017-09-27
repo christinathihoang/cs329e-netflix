@@ -40,11 +40,11 @@ YEAR_OF_RATING = create_cache("cache-yearCustomerRatedMovie.pickle")
 CUSTOMER_AVERAGE_RATING_YEARLY = create_cache(
     "cache-customerAverageRatingByYear.pickle")
 
-actual_scores_cache = create_cache("cache-actualCustomerRating.pickle")
+actual_scores_cache = create_cache("JT26983-ActualRatingByCustomerIDAndMovieID.pickle")
 movie_year_cache = create_cache("JT26983-MovieYearByMovieID.pickle")
 avg_score_year_cache = create_cache("cache-movieAverageByYear.pickle")
 
-# ------------
+	# ------------
 # netflix_eval
 # ------------
 
@@ -65,9 +65,12 @@ def netflix_eval(reader, writer) :
                 year = 1998
             avg_pred = []
             for i in range(int(year), 2006):
-                pred = avg_score_year_cache[int(current_movie)][int(i)]
+                try:
+                    pred = avg_score_year_cache[int(current_movie)][int(i)]
+                except:
+                    pred = 3.7 
                 avg_pred.append(pred)
-            prediction = sum(avg_pred)/(2006-int(year))
+                prediction = sum(avg_pred)/(2006-int(year))
             writer.write(line)
             writer.write('\n')
         else:
