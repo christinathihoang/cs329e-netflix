@@ -12,6 +12,8 @@ import sys
 # ----
 
 if __name__ == "__main__":
+#    sys.stdin = open("RunNetflix.in","r")
+#    sys.stout = open("RunNetflix.out","w")
     netflix_eval(sys.stdin, sys.stdout)
 
 

@@ -41,9 +41,9 @@ CUSTOMER_AVERAGE_RATING_YEARLY = create_cache(
     "cache-customerAverageRatingByYear.pickle")
 '''
 
-actual_scores_cache ={10040: {2417853: 1, 1207062: 2, 2487973: 3}}
-movie_year_cache = {10040: 1990}
-decade_avg_cache = {1990: 2.4}
+actual_scores_cache = create_cache(cache-actualCustomerRating.pickle)
+movie_year_cache = create_cache(cache-movieAverageByYear.pickle)
+decade_avg_cache = {}
 
 # ------------
 # netflix_eval
