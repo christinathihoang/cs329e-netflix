@@ -1,11 +1,6 @@
-.
-----------------------------------------------------------------------
-Ran 1 test in 0.000s
-
-OK
-Name             Stmts   Miss Branch BrPart  Cover   Missing
-------------------------------------------------------------
-Netflix.py          27      0      4      0   100%
-TestNetflix.py      13      0      0      0   100%
-------------------------------------------------------------
-TOTAL               40      0      4      0   100%
+Traceback (most recent call last):
+  File "TestNetflix.py", line 6, in <module>
+    from Netflix import netflix_eval
+  File "/v/filer5b/v35q001/hoangc/github/cs329e-netflix/Netflix.py", line 44, in <module>
+    actual_scores_cache = create_cache("cache-actualCustomerRating.pickle")
+NameError: name 'create_cache' is not defined

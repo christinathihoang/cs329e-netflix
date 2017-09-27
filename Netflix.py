@@ -10,7 +10,7 @@ from requests import get
 from os import path
 from numpy import sqrt, square, mean, subtract
 
-'''
+
 def create_cache(filename):
     """
     filename is the name of the cache file to load
@@ -39,11 +39,10 @@ AVERAGE_MOVIE_RATING_PER_YEAR = create_cache(
 YEAR_OF_RATING = create_cache("cache-yearCustomerRatedMovie.pickle")
 CUSTOMER_AVERAGE_RATING_YEARLY = create_cache(
     "cache-customerAverageRatingByYear.pickle")
-'''
 
-actual_scores_cache = create_cache(cache-actualCustomerRating.pickle)
-movie_year_cache = create_cache(cache-movieAverageByYear.pickle)
-decade_avg_cache = {}
+actual_scores_cache = create_cache("cache-actualCustomerRating.pickle")
+movie_year_cache = create_cache("JT26983-MovieYearByMovieID.pickle")
+avg_score_year_cache = create_cache("cache-movieAverageByYear.pickle")
 
 # ------------
 # netflix_eval
@@ -61,9 +60,14 @@ def netflix_eval(reader, writer) :
         if line[-1] == ':':
 		# It's a movie
             current_movie = line.rstrip(':')
-            pred = movie_year_cache[int(current_movie)]
-            pred = (pred // 10) *10
-            prediction = decade_avg_cache[pred]
+            year = movie_year_cache[int(current_movie)]
+            if year <= 1998:
+                year = 1998
+            avg_pred = []
+            for i in range(int(year), 2006):
+                pred = avg_score_year_cache[int(current_movie)][int(i)]
+                avg_pred.append(pred)
+            prediction = sum(avg_pred)/(2006-int(year))
             writer.write(line)
             writer.write('\n')
         else:
@@ -72,7 +76,8 @@ def netflix_eval(reader, writer) :
             predictions.append(prediction)
             actual.append(actual_scores_cache[int(current_movie)][int(current_customer)])
             writer.write(str(prediction)) 
-            writer.write('\n')	
+            writer.write('\n')
+                
     # calculate rmse for predications and actuals
     rmse = sqrt(mean(square(subtract(predictions, actual))))
     writer.write(str(rmse)[:4] + '\n')
