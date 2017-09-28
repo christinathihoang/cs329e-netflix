@@ -43,6 +43,7 @@ CUSTOMER_AVERAGE_RATING_YEARLY = create_cache(
 actual_scores_cache = create_cache("JT26983-ActualRatingByCustomerIDAndMovieID.pickle")
 movie_year_cache = create_cache("JT26983-MovieYearByMovieID.pickle")
 avg_score_year_cache = create_cache("cache-movieAverageByYear.pickle")
+avg_movie_rating_cache = create_cache("JT26983-AvgMovieRatingByMovieID.pickle")
 
 # ------------
 # netflix_eval
@@ -59,28 +60,20 @@ def netflix_eval(reader, writer):
         # check if the line ends with a ":", i.e., it's a movie title 
         if line[-1] == ':':
             # It's a movie
-            current_movie = line.rstrip(':')
-            # check if movie is in cache
-            year = movie_year_cache[int(current_movie)]
-            if year <= 1998:
-                year = 1998
-            avg_pred = []
-            for i in range(int(year), 2006):
-                pred = avg_score_year_cache[int(current_movie)][int(i)] 
-                avg_pred.append(pred)
-            prediction = sum(avg_pred)/(2006-int(year))
-        else:
-	    # It's a customer
-            current_customer = line
-            predictions.append(prediction)
-            actual_score = actual_scores_cache[int(current_movie),int(current_customer)]
-            actual.append(actual_score)
             writer.write(line)
             writer.write('\n')
-            writer.write(str(prediction)) 
+            current_movie = line.rstrip(':')
+            pred = avg_movie_rating_cache[int(current_movie)]
+        else:
+	    # Its a customer
+            current_customer = line
+            predictions.append(prediction)
+            actual_score = actual_scores_cache[(int(current_customer),int(current_movie))]
+            actual.append(int(actual_score))
+            writer.write(str(pred)) 
             writer.write('\n')
 
                 
     # calculate rmse for predications and actuals
-    rmse = sqrt((prediction-actual)/len(actual))
-    writer.write(str(rmse)[:4] + '\n')
+#    rmse = sqrt(mean(square(subtract(predictions, actual))))
+#    writer.write(str(rmse)[:4] + '\n')

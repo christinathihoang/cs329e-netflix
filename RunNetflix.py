@@ -12,8 +12,6 @@ import sys
 # ----
 
 if __name__ == "__main__":
-    sys.stdin = open("RunNetflix.in","r")
-    sys.stdout = open("RunNetflix.tmp","w+")
     netflix_eval(sys.stdin, sys.stdout)
 
 
@@ -40,5 +38,5 @@ if __name__ == "__main__":
 
 
 % pydoc3 -w Netflix
-# That creates the file Netflix.html
+# That creates the file Collatz.html
 """
