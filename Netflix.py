@@ -58,27 +58,26 @@ def netflix_eval(reader, writer):
         line = line.strip()
         # check if the line ends with a ":", i.e., it's a movie title 
         if line[-1] == ':':
-		# It's a movie
+            # It's a movie
             current_movie = line.rstrip(':')
-            year = movie_year_cache[int(current_movie)]
-            if year <= 1998:
-                year = 1998
-            avg_pred = []
-            for i in range(int(year), 2006):
-                try:
-                    pred = avg_score_year_cache[int(current_movie)][int(i)]
-                except:
-                    pred = 3.7 
+            # check if movie is in cache
+            if current_movie in avg_score_year_cache:
+                year = movie_year_cache[int(current_movie)]
+                if year <= 1998:
+                    year = 1998
+                avg_pred = []
+                for i in range(int(year), 2006):
+                    pred = avg_score_year_cache[int(current_movie)][int(i)] 
                 avg_pred.append(pred)
                 prediction = sum(avg_pred)/(2006-int(year))
-            writer.write(line)
-            writer.write('\n')
-        else:
+        elif line[-1] == ":" and current_movie in avg_score_year_cache:
 	    # It's a customer
             current_customer = line
             predictions.append(prediction)
             actual_score = actual_scores_cache[int(current_movie),int(current_customer)]
             actual.append(actual_score)
+            writer.write(line)
+            writer.write('\n')
             writer.write(str(prediction)) 
             writer.write('\n')
 
