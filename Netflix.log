@@ -1,3 +1,48 @@
+commit 913a683e1d2e944dd5f63b07cc405cc2c76270a0 (HEAD -> master, origin/master, origin/HEAD)
+Author: Christina Hoang <hoangc@cs.utexas.edu>
+Date:   Thu Sep 28 18:24:07 2017 -0500
+
+    Update files
+
+commit 5c22c2c5dca0825777fded00077972e9e85e2810
+Author: Christina Hoang <hoangc@cs.utexas.edu>
+Date:   Thu Sep 28 18:18:23 2017 -0500
+
+    Update files
+
+commit cc82b01f428b861ff1eaa00a93f33cede320210c (dev)
+Author: Christina Hoang <hoangc@cs.utexas.edu>
+Date:   Thu Sep 28 17:51:41 2017 -0500
+
+    Update files
+
+commit 9f94bad4178b6e51bbc8433b9c38dbfaf9e2326d
+Author: Christina Hoang <hoangc@cs.utexas.edu>
+Date:   Thu Sep 28 17:15:38 2017 -0500
+
+commit 74a882dfd147c2b410d2312ef92e6bc1c28ef750
+Author: Christina Hoang <hoangc@cs.utexas.edu>
+Date:   Tue Sep 26 18:40:46 2017 -0500
+
+    Update TestNetflix.py
+
+commit 78ee3445861c564dff33b023bd8e6d6e696a8e89
+Author: Christina Hoang <hoangc@cs.utexas.edu>
+Date:   Tue Sep 26 11:06:45 2017 -0500
+
+    Update RunNetflix.in
+
+commit 8619a0d053f26f3556e6844ac066a88f081a5ab1 (origin/dev)
+Author: Christina Hoang <hoangc@cs.utexas.edu>
+Date:   Mon Sep 25 02:50:48 2017 -0500
+
+    first commit
+
+commit 6ebe14ddd2c6298e1aac5726ae9b62605aaca0f2
+Author: Christina Hoang <christinahoang@utexas.edu>
+Date:   Tue Sep 19 18:46:33 2017 -0500
+
+    Initial commit
 commit 6ebe14ddd2c6298e1aac5726ae9b62605aaca0f2
 Author: Christina Hoang <christinahoang@utexas.edu>
 Date:   Tue Sep 19 18:46:33 2017 -0500
