@@ -61,16 +61,15 @@ def netflix_eval(reader, writer):
             # It's a movie
             current_movie = line.rstrip(':')
             # check if movie is in cache
-            if current_movie in avg_score_year_cache:
-                year = movie_year_cache[int(current_movie)]
-                if year <= 1998:
-                    year = 1998
-                avg_pred = []
-                for i in range(int(year), 2006):
-                    pred = avg_score_year_cache[int(current_movie)][int(i)] 
+            year = movie_year_cache[int(current_movie)]
+            if year <= 1998:
+                year = 1998
+            avg_pred = []
+            for i in range(int(year), 2006):
+                pred = avg_score_year_cache[int(current_movie)][int(i)] 
                 avg_pred.append(pred)
-                prediction = sum(avg_pred)/(2006-int(year))
-        elif line[-1] == ":" and current_movie in avg_score_year_cache:
+            prediction = sum(avg_pred)/(2006-int(year))
+        else:
 	    # It's a customer
             current_customer = line
             predictions.append(prediction)
@@ -82,7 +81,6 @@ def netflix_eval(reader, writer):
             writer.write('\n')
 
                 
-        # calculate rmse for predications and actuals
-        for i in range(len(actual)):
-           rmse = sqrt((prediction-actual)/len(actual))
-           writer.write(str(rmse)[:4] + '\n')
+    # calculate rmse for predications and actuals
+    rmse = sqrt((prediction-actual)/len(actual))
+    writer.write(str(rmse)[:4] + '\n')

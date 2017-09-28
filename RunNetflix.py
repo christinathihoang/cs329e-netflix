@@ -13,7 +13,7 @@ import sys
 
 if __name__ == "__main__":
     sys.stdin = open("RunNetflix.in","r")
-    sys.stdout = open("RunNetflix.out","w+")
+    sys.stdout = open("RunNetflix.tmp","w+")
     netflix_eval(sys.stdin, sys.stdout)
 
 
