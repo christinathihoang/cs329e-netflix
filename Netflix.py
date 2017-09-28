@@ -80,7 +80,8 @@ def netflix_eval(reader, writer):
         if line[-1] == ':':
 		# It's a movie
             current_movie = line.rstrip(':')
-            writer.write(str(current_movie) + "\n")
+            writer.write(str(current_movie))
+            writer.write('\n')
         else:
 	    # It's a customer
             current_customer = line
